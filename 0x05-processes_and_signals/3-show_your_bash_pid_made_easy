@@ -1,0 +1,5 @@
+#!/user/bin/env bash
+#list all bah processes
+# shellcheck disable-SC2009
+
+pgrep -1 bash

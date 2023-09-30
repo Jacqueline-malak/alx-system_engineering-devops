@@ -1,0 +1,5 @@
+#!/user/bin/env bash 
+# send SIGINT signal
+
+pervious_pid=$(pgrep -f "4-to_infinity_and_byond" );
+KILL -s SIGKILL "$previous_pid";
