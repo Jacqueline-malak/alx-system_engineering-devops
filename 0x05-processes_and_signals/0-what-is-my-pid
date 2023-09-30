@@ -1,4 +1,5 @@
-#!/user/bin/env bash
-# Displays its own PID.
+#!/usr/bin/env bash
+#script that displays its PID to stdout
+# Alternative method is 'echo $$
 
-echo $$
+(ps -p $$ | tail -n 1 | awk '{print $1}')

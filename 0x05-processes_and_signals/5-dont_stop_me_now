@@ -1,5 +1,5 @@
-#!/user/bin/env bash 
-# send SIGINT signal
+#!/user/bin/env bash
+# Kills the 4-to_infinity_and_beyond process
 
-pervious_pid=$(pgrep -f "4-to_infinity_and_byond" );
-KILL -s SIGKILL "$previous_pid";
+pgrep -f "./4-to_infinity_and_beyond" | xargs kill
+

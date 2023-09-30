@@ -1,5 +1,7 @@
-#!/user/bin/env bash
-#list all bah processes
-# shellcheck disable-SC2009
-
-pgrep -1 bash
+#!/usr/bin/env bash
+#print bash pid to stdout
+# Alternative is 'pgrep -l bash',
+ 
+for proc in $(pgrep bash); do
+    echo "$proc bash";
+done
