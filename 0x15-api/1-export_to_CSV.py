@@ -1,9 +1,9 @@
 
 #!/usr/bin/python3
 """
-A Script that, uses a RESTAPI, for a given employee ID, returns
+A Script that, uses a REST API, for a given employee ID, returns
 information about his/her TODO list progress
-exporting data in the CSVformat.
+exporting data in the CSV format.
 """
 
 import csv

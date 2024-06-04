@@ -1,9 +1,9 @@
 
 #!/usr/bin/python3
 """
-Script that, using this REST API, for a given employee ID, returns
+A sript that, uses a REST API, for a given employee ID, returns
 information about his/her TODO list progress
-and export data in the JSON format.
+and exports data in the JSON format.
 """
 
 import json
@@ -13,26 +13,31 @@ from sys import argv
 
 if __name__ == "__main__":
 
-    import json
-    import requests
-    import sys
+    sessionReq = requests.Session()
 
-    users = requests.get("https://jsonplaceholder.typicode.com/users")
-    users = users.json()
-    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
-    todos = todos.json()
-    todoAll = {}
+    idEmp = argv[1]
+    idURL = 'https://jsonplaceholder.typicode.com/users/{}/todos'.format(idEmp)
+    nameURL = 'https://jsonplaceholder.typicode.com/users/{}'.format(idEmp)
 
-    for user in users:
-        taskList = []
-        for task in todos:
-            if task.get('userId') == user.get('id'):
-                taskDict = {"username": user.get('username'),
-                            "task": task.get('title'),
-                            "completed": task.get('completed')}
-                taskList.append(taskDict)
-        todoAll[user.get('id')] = taskList
+    employee = sessionReq.get(idURL)
+    employeeName = sessionReq.get(nameURL)
 
-    with open('todo_all_employees.json', mode='w') as f:
-        json.dump(todoAll, f)
+    json_req = employee.json()
+    usr = employeeName.json()['username']
+
+    totalTasks = []
+    updateUser = {}
+
+    for all_Emp in json_req:
+        totalTasks.append(
+            {
+                "task": all_Emp.get('title'),
+                "completed": all_Emp.get('completed'),
+                "username": usr,
+            })
+    updateUser[idEmp] = totalTasks
+
+    file_Json = idEmp + ".json"
+    with open(file_Json, 'w') as f:
+        json.dump(updateUser, f)
 
